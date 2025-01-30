@@ -11,7 +11,7 @@ $difference = (New-TimeSpan -Start $converteddatetime -End $(Get-Date -DisplayHi
 "$(Get-Date -DisplayHint DateTime) ; Last machine policy sync on $computer was on $converteddatetime" | Tee-Object $env:USERPROFILE\desktop\policyspy.log -Append
 if ($difference -gt 2)
 {
-Invoke-WMIMethod -ComputerName $computer -Namespace root\ccm -Class SMS_Client -Name ResetPolicy -ArgumentList “1” -Verbose
+Invoke-WMIMethod -ComputerName $computer -Namespace root\ccm -Class SMS_Client -Name ResetPolicy -ArgumentList "1" -Verbose
 "$(Get-Date -DisplayHint DateTime) ; Resetting machine policy on $computer since policy sync was out of threshold" | Tee-Object $env:USERPROFILE\desktop\policyspy.log -Append
 }
 else
